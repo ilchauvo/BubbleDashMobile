@@ -1,0 +1,3352 @@
+##Choose Noctis theme
+##Lot of time spent on this Bubble dashboard, hope it will help you ;)
+kiosk_mode:
+  mobile_settings:
+    hide_header: true
+views:
+  - type: sections
+    max_columns: 1
+    title: Home
+    app-header-background-color: '#ccae99'
+    path: mobiledash
+    sections:
+      - type: grid
+        cards:
+          - type: custom:bubble-card
+            card_type: button
+            button_type: state
+            entity: person.manu
+            show_attribute: true
+            show_icon: true
+            force_icon: false
+            show_last_changed: true
+            styles: |
+              ha-card {
+                background: url("/local/images/backgrounds/bkg_beige_bleu20.jpg") !important;
+                background-position: bottom !important;
+                background-repeat: no-repeat;
+                background-size: cover !important;
+                height: 85px !important;
+                margin-right: -10px !important;
+                margin-left: -10px !important;
+                margin-top: -10px !important;
+                border-radius: 0 !important;
+                background-repeat: no-repeat !important;
+              }
+              .bubble-button-card-container {
+                background: transparent !important;
+                padding-top: 4px;
+              }
+              .bubble-name {
+                  font-size: 20px;
+              }
+              .bubble-state {
+                  font-size: 15px;
+              }
+              ha-card::after {
+                position: absolute;
+                top: 4px;
+                left: 36px;
+                padding: 0 6px;
+                border-radius: 80%;
+                border: 0px solid black;
+                color: #fff;
+                font-size: 9px;
+                content: "H";
+                background: green;
+                display: block;
+              }
+            sub_button:
+              - icon: mdi:volume-off
+                state_background: false
+                show_background: false
+                tap_action:
+                  action: perform-action
+                  perform_action: automation.trigger
+                  target:
+                    entity_id: automation.mute_all_speakers
+                  data:
+                    skip_condition: true
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+              - entity: input_select.liste_option_dropdown_gui_bubble_iphone
+                show_state: false
+                show_icon: true
+                force_icon: false
+                icon: mdi:cog
+                show_background: false
+                show_arrow: false
+            card_layout: large
+            tap_action:
+              action: none
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            button_action:
+              tap_action:
+                action: none
+              double_tap_action:
+                action: none
+              hold_action:
+                action: none
+          - type: custom:gap-card
+            height: 25
+          - type: custom:bubble-card
+            card_type: separator
+            name: Shortcuts
+            card_layout: large
+            styles: |-
+              .bubble-line {
+                  background-color: #ccae99;
+              }
+          - type: custom:swipe-card
+            parameters:
+              spaceBetween: 25
+              scrollbar:
+                hide: true
+                draggable: true
+                snapOnRelease: true
+            cards:
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: weather.adresse
+                    name: Weather
+                    show_state: true
+                    card_layout: large-2-rows
+                    sub_button:
+                      - name: Home temperature
+                        icon: mdi:home-thermometer-outline
+                        entity: sensor.lumi_temp_salon_temperature
+                        show_state: true
+                        show_icon: true
+                        show_background: false
+                      - name: Outside temperature
+                        entity: >-
+                          sensor.thgn122_123_thgn132_thgr122_228_238_268_38_04_jardin_temperature
+                        show_state: true
+                        show_background: false
+                    styles: ''
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: sensor.wifek_wifek
+                    name: Trash
+                    show_state: true
+                    card_layout: large-2-rows
+                    sub_button:
+                      - name: General
+                        icon: mdi:broadcast-off
+                        entity: sensor.poubelles_generales
+                        show_state: false
+                        show_icon: true
+                        show_background: false
+                        show_name: true
+                      - name: Papier
+                        entity: sensor.poubelles_papier
+                        show_state: false
+                        show_background: false
+                        icon: mdi:file-compare
+                        show_name: true
+                        show_attribute: false
+                      - name: Vegetaux
+                        entity: sensor.poubelles_vegetaux
+                        show_name: true
+                        show_state: false
+                        tap_action:
+                          action: more-info
+                        icon: mdi:leaf
+                        show_attribute: false
+                        attribute: next_date
+                        state_background: true
+                        show_background: false
+                      - name: Verre
+                        entity: sensor.poubelles_verre
+                        show_name: true
+                        show_state: false
+                        show_background: false
+                        icon: mdi:bottle-wine-outline
+                    icon: mdi:trash-can-outline
+                    styles: |-
+                      .bubble-icon {
+                        background-color: ${hass.states['sensor.poubelles_generales'].state === "1" ? 'white' : hass.states['sensor.poubelles_papier'].state === "1" ? 'white' : hass.states['sensor.poubelles_vegetaux'].state === "1" ? 'white' : hass.states['sensor.poubelles_verre'].state === 'inherit'} !important;
+                      }
+
+                      .bubble-sub-button-1 {
+                        background-color: ${hass.states['sensor.poubelles_generales'].state === "1" ? '#ccae99' : 'none'}!important;
+                      }
+                      .bubble-sub-button-2 {
+                        background-color: ${hass.states['sensor.poubelles_papier'].state === "1" ? '#ccae99' : 'none'}!important;
+                        width: 100%;
+                      }
+                      .bubble-sub-button-3 {
+                        background-color: ${hass.states['sensor.poubelles_vegetaux'].state === "1" ? '#ccae99' : 'none'}!important;
+                        width: 100%;
+                      }
+                      .bubble-sub-button-4 {
+                        background-color: ${hass.states['sensor.poubelles_verre'].state === "1" ? '#ccae99' : 'none'}!important;
+                        width: 100%;
+                      }
+                    tap_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      tap_action:
+                        action: none
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    name: Energy
+                    show_state: true
+                    card_layout: large-2-rows
+                    sub_button:
+                      - name: Home temperature
+                        icon: mdi:water-check-outline
+                        show_state: true
+                        show_icon: true
+                        show_background: false
+                        tap_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        button_action:
+                          tap_action:
+                            action: none
+                          double_tap_action:
+                            action: none
+                          hold_action:
+                            action: none
+                        entity: sensor.consommation_eau_quotidienne
+                      - name: Outside temperature
+                        entity: sensor.consommation_eau_annuelle
+                        show_state: true
+                        show_background: false
+                        tap_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        button_action:
+                          tap_action:
+                            action: none
+                          double_tap_action:
+                            action: none
+                          hold_action:
+                            action: none
+                        icon: mdi:counter
+                      - name: Today
+                        entity: sensor.consommation_gaz_quotidienne
+                        show_name: false
+                        show_state: true
+                        tap_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        button_action:
+                          tap_action:
+                            action: none
+                          double_tap_action:
+                            action: none
+                          hold_action:
+                            action: none
+                        show_background: false
+                        show_icon: true
+                      - name: Tomorrow
+                        entity: sensor.consommation_gaz_annuelle
+                        show_name: false
+                        show_state: true
+                        tap_action:
+                          action: none
+                        double_tap_action:
+                          action: none
+                        hold_action:
+                          action: none
+                        button_action:
+                          tap_action:
+                            action: none
+                          double_tap_action:
+                            action: none
+                          hold_action:
+                            action: none
+                        show_background: false
+                    styles: ''
+                    icon: mdi:home-lightning-bolt-outline
+                    entity: sensor.wifek_wifek
+                    tap_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      tap_action:
+                        action: none
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - square: false
+                    type: grid
+                    cards:
+                      - type: custom:bubble-card
+                        card_type: button
+                        button_type: name
+                        card_layout: large-2-rows
+                        name: Home
+                        entity: sensor.wifek_wifek
+                        icon: mdi:account-group
+                        show_state: true
+                        button_action:
+                          tap_action: none
+                        sub_button:
+                          - entity: person.wife
+                            icon: mdi:counter
+                            show_background: false
+                            show_state: false
+                            tap_action:
+                              action: none
+                            state_background: true
+                            show_icon: false
+                            show_name: true
+                            show_attribute: false
+                          - entity: person.daughter
+                            show_state: false
+                            show_background: false
+                            show_icon: false
+                            show_name: true
+                            tap_action:
+                              action: none
+                          - entity: person.manu
+                            show_background: false
+                            show_state: false
+                            show_icon: false
+                            show_name: true
+                            tap_action:
+                              action: none
+                          - entity: person.son
+                            show_state: false
+                            show_background: false
+                            icon: ''
+                            show_icon: false
+                            show_name: true
+                            tap_action:
+                              action: none
+                        styles: |-
+                          .bubble-icon {
+                              opacity: ${hass.states['person.manu'].state === "home" ? '1' : hass.states['person.wife'].state === "home" ? '1' : hass.states['person.daughter'].state === "home" ? '1' : hass.states['person.son'].state === "home" ? '1' : '0.6'} !important;
+                          }
+                          .bubble-sub-button-1 {
+                            background-color: ${hass.states['person.wife'].state === "home" ? '#ccae99' : 'none'}!important;
+                            width: 100%;
+                          }
+                          .bubble-sub-button-2 {
+                            background-color: ${hass.states['person.daughter'].state === "home" ? '#ccae99' : 'none'}!important;
+                            width: 100%;
+                          }
+                          .bubble-sub-button-3 {
+                            background-color: ${hass.states['person.manu'].state === "home" ? '#ccae99' : 'none'}!important;
+                            width: 100%;
+                          }
+                          .bubble-sub-button-4 {
+                            background-color: ${hass.states['person.son'].state === "home" ? '#ccae99' : 'none'}!important;
+                            width: 100%;
+                          }
+                        columns: 2
+                        show_name: false
+                      - type: custom:bubble-card
+                        card_type: button
+                        button_type: name
+                        card_layout: large-2-rows
+                        name: Status
+                        entity: sensor.wifek_wifek
+                        icon: mdi:state-machine
+                        show_state: true
+                        button_action:
+                          tap_action: none
+                        sub_button:
+                          - entity: sensor.opened_doors
+                            icon: mdi:door-open
+                            show_background: false
+                            show_state: true
+                            tap_action:
+                              action: more-info
+                            state_background: true
+                            show_icon: true
+                            show_name: false
+                            show_attribute: false
+                            name: ''
+                          - entity: sensor.cars_not_home
+                            show_state: true
+                            show_background: false
+                            show_icon: true
+                            show_name: false
+                            name: ''
+                            icon: mdi:car
+                            tap_action:
+                              action: navigate
+                              navigation_path: '#dashdetailcars'
+                          - entity: sensor.cams_home
+                            show_background: false
+                            show_state: true
+                            show_icon: true
+                            show_name: false
+                            icon: mdi:cctv
+                            name: ''
+                            tap_action:
+                              action: navigate
+                              navigation_path: '#dashcameras'
+                          - entity: sensor.lumieres_allumees
+                            show_state: true
+                            show_background: false
+                            icon: mdi:lightbulb-on-20
+                            show_icon: true
+                            show_name: false
+                            name: ''
+                            tap_action:
+                              action: navigate
+                              navigation_path: '#dashdetaillousses'
+                        columns: 2
+                        show_name: false
+                        styles: |-
+                          .bubble-icon {
+                              opacity: ${hass.states['sensor.opened_doors'].state > 0 ? '1' : hass.states['sensor.cars_not_home'].state < 2 ? '1' : hass.states['sensor.cams_home'].state < 6 ? '1' : hass.states['sensor.lumieres_allumees'].state > 0 ? '1' : '0.6'} !important;
+                          }
+                          .bubble-sub-button-1 {
+                            background-color: ${hass.states['sensor.opened_doors'].state > 0 ? '#ccae99' : 'none'}!important;
+                          }
+                          .bubble-sub-button-2 {
+                            background-color: ${hass.states['sensor.cars_not_home'].state < 2 ? '#ccae99' : 'none'}!important;
+                          }
+                          .bubble-sub-button-3 {
+                            background-color: ${hass.states['sensor.cams_home'].state < 6 ? '#ccae99' : 'none'}!important;
+                          }
+                          .bubble-sub-button-4 {
+                            background-color: ${hass.states['sensor.lumieres_allumees'].state > 0 ? '#ccae99' : 'none'}!important;
+                          }
+                    columns: 2
+                columns: 1
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:button-card
+                    show_state: true
+                    styles:
+                      card:
+                        - background-color: '#1e293d'
+                        - box-shadow: none
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                        - height: 115px
+                        - width: 185px
+                      img_cell:
+                        - background-color: rgb(72, 82, 100)
+                        - border-radius: 100%
+                        - width: 60px
+                        - height: 60px
+                        - background-color: '#273750'
+                        - margin: 36px 0 0 -15px
+                      icon:
+                        - width: 42px
+                        - height: 42px
+                        - margin: 0px 0 0 0px
+                      name:
+                        - color: white
+                        - font-size: 0.9em
+                        - font-weight: bold
+                        - height: 30px
+                        - width: 100%
+                        - text-align: left
+                        - margin: '-157px 0 0 40px'
+                      state:
+                        - color: white
+                        - margin: 40px 0 0 -40px
+                        - font-size: 0.8em
+                      label: test
+                      grid:
+                        - grid-template-areas: '" i s " " n n " " notification notification"'
+                        - grid-template-rows: 1fr 1fr 1fr
+                        - grid-template-columns: 1fr 1fr
+                    state:
+                      - value: 'off'
+                        styles:
+                          icon:
+                            - color: grey
+                          img_cell:
+                            - background-color: '#273750'
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: white
+                      - value: unavailable
+                        styles:
+                          icon:
+                            - color: red
+                    entity: light.all_lights
+                    name: Lights
+                    icon: mdi:lightbulb
+                    hold_action:
+                      action: more-info
+                  - type: custom:button-card
+                    show_state: true
+                    styles:
+                      card:
+                        - background-color: '#1e293d'
+                        - box-shadow: none
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                        - height: 115px
+                        - width: 185px
+                      img_cell:
+                        - background-color: rgb(72, 82, 100)
+                        - border-radius: 100%
+                        - width: 60px
+                        - height: 60px
+                        - background-color: '#273750'
+                        - margin: 36px 0 0 -15px
+                      icon:
+                        - width: 42px
+                        - height: 42px
+                        - margin: 0px 0 0 0px
+                      name:
+                        - color: white
+                        - font-size: 0.9em
+                        - font-weight: bold
+                        - height: 30px
+                        - width: 100%
+                        - text-align: left
+                        - margin: '-157px 0 0 40px'
+                      state:
+                        - color: white
+                        - margin: 40px 0 0 -40px
+                        - font-size: 0.8em
+                      label: test
+                      grid:
+                        - grid-template-areas: '" i s " " n n " " notification notification"'
+                        - grid-template-rows: 1fr 1fr 1fr
+                        - grid-template-columns: 1fr 1fr
+                    state:
+                      - value: 'off'
+                        styles:
+                          icon:
+                            - color: grey
+                          img_cell:
+                            - background-color: '#273750'
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: grey
+                          img_cell:
+                            - background-color: '#273750'
+                      - value: paused
+                        styles:
+                          icon:
+                            - color: white
+                          img_cell:
+                            - background-color: '#273750'
+                      - value: unavailable
+                        styles:
+                          icon:
+                            - color: red
+                    entity: media_player.all_speakers
+                    name: Music
+                    icon: mdi:volume-off
+                    tap_action:
+                      action: perform-action
+                      perform_action: automation.trigger
+                      target:
+                        entity_id: automation.mute_all_speakers
+                      data:
+                        skip_condition: true
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                  - type: custom:button-card
+                    show_state: true
+                    state_display: |
+                      [[[
+                        return (entity.state === 'on')
+                          ? 'Closed'
+                          : 'Opened';
+                      ]]]
+                    styles:
+                      card:
+                        - background-color: '#1e293d'
+                        - box-shadow: none
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                        - height: 115px
+                        - width: 185px
+                      img_cell:
+                        - background-color: rgb(72, 82, 100)
+                        - border-radius: 100%
+                        - width: 60px
+                        - height: 60px
+                        - background-color: '#273750'
+                        - margin: 36px 0 0 -15px
+                      icon:
+                        - width: 42px
+                        - height: 42px
+                        - margin: 0px 0 0 0px
+                      name:
+                        - color: white
+                        - font-size: 0.9em
+                        - font-weight: bold
+                        - height: 30px
+                        - width: 100%
+                        - text-align: left
+                        - margin: '-157px 0 0 40px'
+                      state:
+                        - color: white
+                        - margin: 40px 0 0 -40px
+                        - font-size: 0.8em
+                      label: test
+                      grid:
+                        - grid-template-areas: '" i s " " n n " " notification notification"'
+                        - grid-template-rows: 1fr 1fr 1fr
+                        - grid-template-columns: 1fr 1fr
+                    state:
+                      - value: 'off'
+                        styles:
+                          icon:
+                            - color: grey
+                          img_cell:
+                            - background-color: '#273750'
+                      - value: 'on'
+                        styles:
+                          icon:
+                            - color: white
+                      - value: unavailable
+                        styles:
+                          icon:
+                            - color: red
+                    entity: light.all_lights
+                    name: Home
+                    icon: mdi:home-export-outline
+                    tap_action:
+                      action: perform-action
+                      perform_action: script.leave_home
+                      target: {}
+                    hold_action:
+                      action: none
+                  - type: custom:button-card
+                    styles:
+                      card:
+                        - background-color: '#1e293d'
+                        - box-shadow: none
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                        - height: 115px
+                        - width: 185px
+                      img_cell:
+                        - background-color: rgb(72, 82, 100)
+                        - border-radius: 100%
+                        - width: 60px
+                        - height: 60px
+                        - background-color: '#273750'
+                        - margin: 36px 0 0 -95px
+                      icon:
+                        - width: 42px
+                        - height: 42px
+                        - margin: 0px 0 0 0px
+                      name:
+                        - color: white
+                        - font-size: 0.9em
+                        - font-weight: bold
+                        - height: 30px
+                        - width: 100%
+                        - text-align: left
+                        - margin: '-157px 0 0 40px'
+                      custom_fields:
+                        notification1:
+                          - background-color: |
+                              [[[
+                                if (states['sensor.phones_not_home'].state == 0) return "#ccae99";
+                                return "#1e293d";
+                              ]]]
+                          - color: |
+                              [[[
+                                if (states['sensor.phones_not_home'].state == 0) return "black";
+                                return "white";
+                              ]]]
+                          - border-radius: >-
+                              var(--bubble-sub-button-border-radius,
+                              var(--bubble-border-radius, 32px));
+                          - position: absolute
+                          - left: 50%
+                          - top: 45%
+                          - height: 20px
+                          - width: 75px
+                          - font-size: 13px
+                          - line-height: 20px
+                        notification2:
+                          - background-color: |
+                              [[[
+                                if (states['sensor.phones_not_home'].state == 2) return "#ccae99";
+                                return "#1e293d";
+                              ]]]
+                          - color: |
+                              [[[
+                                if (states['sensor.phones_not_home'].state == 0) return "black";
+                                return "white";
+                              ]]]
+                          - border-radius: >-
+                              var(--bubble-sub-button-border-radius,
+                              var(--bubble-border-radius, 32px));
+                          - position: absolute
+                          - left: 50%
+                          - top: 68%
+                          - height: 20px
+                          - width: 75px
+                          - font-size: 13px
+                          - line-height: 20px
+                    custom_fields:
+                      notification1: >
+                        [[[ return (states['sensor.phones_not_home'].state) +'/4
+                        phones']]]
+                      notification2: >
+                        [[[ return (states['sensor.phones_not_home'].state) +'/2
+                        others']]]              
+                    entity: sensor.phones_not_home
+                    name: Locate
+                    icon: mdi:map-marker-radius
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#dashphones'
+                    hold_action:
+                      action: none
+                columns: 2
+              - square: true
+                type: grid
+                cards:
+                  - type: custom:button-card
+                    entity: sensor.wifek_wifek
+                    name: |
+                      [[[ 
+                      return states['sensor.upcoming_movie_title'].state
+                      ]]]
+                    icon: mdi:fire
+                    show_state: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - width: 185px
+                        - height: 240px
+                        - background-color: transparent
+                        - background: >
+                            [[[ 
+
+                            return 'url('+
+                            states['sensor.upcoming_movie_image'].state +')'
+
+                            ]]]
+                        - background-position: top
+                        - background-repeat: no-repeat
+                        - background-size: cover
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                      grid:
+                        - grid-template-areas: '"i" "n" "s"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      name:
+                        - justify-self: start
+                        - padding-left: 0px
+                        - padding-top: 5px
+                        - background-color: grey
+                        - width: 100%
+                        - height: 30px
+                        - margin-bottom: '-10px'
+                    grid_options:
+                      columns: 6
+                      rows: 1
+                  - type: custom:button-card
+                    entity: sensor.wifek_wifeke
+                    name: >
+                      [[[ 
+
+                      return
+                      states['sensor.previous_upcoming_movie_title'].state
+
+                      ]]]
+                    icon: mdi:fire
+                    show_state: false
+                    show_icon: false
+                    styles:
+                      card:
+                        - width: 185px
+                        - height: 240px
+                        - background-color: transparent
+                        - background: >
+                            [[[ 
+
+                            return 'url('+
+                            states['sensor.previous_upcoming_movie_image'].state
+                            +')'
+
+                            ]]]
+                        - background-position: top
+                        - background-repeat: no-repeat
+                        - background-size: cover
+                        - border-radius: >-
+                            var(--bubble-sub-button-border-radius,
+                            var(--bubble-border-radius, 32px));
+                      grid:
+                        - grid-template-areas: '"i" "n" "s"'
+                        - grid-template-columns: 1fr
+                        - grid-template-rows: 1fr min-content min-content
+                      name:
+                        - justify-self: start
+                        - padding-left: 0px
+                        - padding-top: 5px
+                        - background-color: grey
+                        - width: 100%
+                        - height: 30px
+                        - margin-bottom: '-10px'
+                    grid_options:
+                      columns: 6
+                      rows: 1
+                columns: 2
+          - type: custom:gap-card
+            height: 15
+          - type: custom:bubble-card
+            card_type: separator
+            name: Rooms
+            card_layout: large
+            styles: |-
+              .bubble-line {
+                  background-color: #ccae99;
+              }
+          - type: custom:swipe-card
+            parameters:
+              spaceBetween: 25
+              scrollbar:
+                hide: true
+                draggable: true
+                snapOnRelease: true
+            cards:
+              - type: picture-elements
+                elements:
+                  - type: image
+                    image: /local/images/light_off.png
+                    tap_action:
+                      action: toggle
+                    state_image:
+                      'off': /local/images/light_off.png
+                      'on': /local/images/light_on.png
+                    entity: light.ikea_ormanas_led_strip_bureau_lumiere
+                    style:
+                      left: 88%
+                      top: 82%
+                  - type: image
+                    image: /local/images/player_off.png
+                    tap_action:
+                      action: perform-action
+                      perform_action: script.play_pause_sonos_bureau_manu
+                      target: {}
+                    double_tap_action:
+                      action: navigate
+                      navigation_path: '#dashmusique'
+                    hold_action:
+                      action: navigate
+                      navigation_path: '#dashmusique'
+                    state_image:
+                      paused: /local/images/sonos_off.png
+                      playing: /local/images/sonos_on.png
+                    entity: media_player.bureau_manu
+                    style:
+                      left: 88%
+                      top: 53%
+                  - type: state-label
+                    entity: sensor.wifek_wifek
+                    prefix: Office Manu
+                    tap_action:
+                      action: none
+                    style:
+                      top: 83%
+                      left: 20%
+                      font-size: 1.4em
+                      color: white
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.lumi_temp_bureau_manu_temperature
+                    tap_action:
+                      action: none
+                    style:
+                      top: 92%
+                      left: 12%
+                      font-size: 1em
+                      color: white
+                image: /local/images/rooms/bureauu_ok_fnl.jpg
+                dark_mode_image: /local/images/rooms/bureauu_ok.jpg
+                card_mod:
+                  style: |
+                    ha-card {
+                      --ha-card-border-width: 0px;
+                      --ha-card-border-radius: 35px;
+                      width:98%;
+                      display: block;
+                      margin-left: 4px;
+                      align: center;
+                    }
+              - type: picture-elements
+                elements:
+                  - type: image
+                    image: /local/images/light_on.png
+                    tap_action:
+                      action: toggle
+                    state_image:
+                      'off': /local/images/light_off.png
+                      'on': /local/images/light_on.png
+                    entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                    style:
+                      left: 88%
+                      top: 82%
+                  - type: state-label
+                    entity: sensor.wifek_wifek
+                    prefix: Salon & cuisine
+                    tap_action:
+                      action: none
+                    style:
+                      top: 83%
+                      left: 25%
+                      font-size: 1.4em
+                      color: white
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.lumi_temp_salon_temperature
+                    tap_action:
+                      action: none
+                    style:
+                      top: 92%
+                      left: 12%
+                      font-size: 1em
+                      color: white
+                image: /local/images/rooms/living-room_ok.jpg
+                dark_mode_image: /local/images/rooms/living-room_ok.jpg
+                card_mod:
+                  style: |
+                    ha-card {
+                      --ha-card-border-width: 0px;
+                      --ha-card-border-radius: 35px;
+                      width:98%;
+                      display: block;
+                      margin-left: 4px;
+                      align: center;
+                    }
+              - type: picture-elements
+                elements:
+                  - type: image
+                    image: /local/images/lamp_on.png
+                    tap_action:
+                      action: toggle
+                    state_image:
+                      'off': /local/images/lamp_off.png
+                      'on': /local/images/lamp_on.png
+                    entity: switch.lumiere_garage_commutateur
+                    style:
+                      left: 88%
+                      top: 82%
+                  - type: state-label
+                    entity: sensor.wifek_wifek
+                    prefix: Garage
+                    tap_action:
+                      action: none
+                    style:
+                      top: 83%
+                      left: 15%
+                      font-size: 1.4em
+                      color: white
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.lumi_temp_garage_temperature
+                    tap_action:
+                      action: none
+                    style:
+                      top: 92%
+                      left: 12%
+                      font-size: 1em
+                      color: white
+                image: /local/images/rooms/garage_cool_ok.jpg
+                dark_mode_image: /local/images/rooms/garage_cool_ok.jpg
+                card_mod:
+                  style: |
+                    ha-card {
+                      --ha-card-border-width: 0px;
+                      --ha-card-border-radius: 35px;
+                      width:98%;
+                      display: block;
+                      margin-left: 4px;
+                      align: center;
+                    }
+              - type: picture-elements
+                elements:
+                  - type: image
+                    image: /local/images/lamp_on.png
+                    tap_action:
+                      action: toggle
+                    state_image:
+                      'off': /local/images/lamp_off.png
+                      'on': /local/images/lamp_on.png
+                    entity: switch.sonoff_zbminil2_lampe_jardin_commutateur
+                    style:
+                      left: 88%
+                      top: 82%
+                  - type: state-label
+                    entity: sensor.wifek_wifek
+                    prefix: Chambre amis
+                    tap_action:
+                      action: none
+                    style:
+                      top: 83%
+                      left: 23%
+                      font-size: 1.4em
+                      color: white
+                      font-weight: bold
+                  - type: state-label
+                    entity: sensor.lumi_temp_chambre_invites_temperature
+                    tap_action:
+                      action: none
+                    style:
+                      top: 92%
+                      left: 12%
+                      font-size: 1em
+                      color: white
+                image: /local/images/rooms/chambre_amis_cool.jpg
+                dark_mode_image: /local/images/rooms/chambre_amis_cool.jpg
+                card_mod:
+                  style: |
+                    ha-card {
+                      --ha-card-border-width: 0px;
+                      --ha-card-border-radius: 35px;
+                      width:98%;
+                      display: block;
+                      margin-left: 4px;
+                      align: center;
+                    }
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashactivitesmaison'
+                button_type: name
+                entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                icon: mdi:home-search-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(400px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Home status
+                tap_action:
+                  action: toggle
+                slide_to_close_distance: '150'
+                styles: |-
+                  .bubble-header-container {
+                      background-color: #ccae99 !important;
+                  }
+              - type: custom:tabbed-card
+                styles:
+                  '--mdc-tab-text-label-color-default': grey
+                options: {}
+                tabs:
+                  - card:
+                      type: custom:vertical-stack-in-card
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background-color: transparent !important;
+                            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                            border: none !important;
+                            --accent-color: #ccae99;
+                            --primary-color: #ffffff;
+                            --secondary-text-color: #ffffff;
+                            --secondary-background-color: #ccae99;
+                          }
+                      cards:
+                        - type: custom:bubble-card
+                          card_type: separator
+                          name: Lights
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 15px !important;
+                              margin-right: 10px !important;
+                              margin-left: 10px !important;
+                            }
+                        - square: false
+                          type: grid
+                          columns: 2
+                          rows: 2
+                          cards:
+                            - type: custom:bubble-card
+                              name: Porche
+                              card_type: button
+                              button_type: switch
+                              entity: switch.sonoff_zbminil2_entree_commutateur
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:lightbulb
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: toggle
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Balancelle
+                              card_type: button
+                              button_type: switch
+                              entity: switch.sonoff_zbminil2_lampe_jardin_commutateur
+                              card_layout: large
+                              icon: mdi:lightbulb
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: toggle
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                            - type: custom:bubble-card
+                              name: Bureau manu
+                              card_type: button
+                              button_type: slider
+                              entity: light.ikea_ormanas_led_strip_bureau_lumiere
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:led-strip-variant
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: toggle
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Cuisine
+                              card_type: button
+                              button_type: slider
+                              entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                              icon: mdi:led-strip-variant
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: toggle
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Garage
+                              card_type: button
+                              button_type: switch
+                              entity: switch.lumiere_garage_commutateur
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 5px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:lightbulb
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: toggle
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                    attributes:
+                      label: Actions
+                  - card:
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background-color: transparent !important;
+                            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                            border: none !important;
+                            --accent-color: #ccae99;
+                            --primary-color: #ffffff;
+                            --secondary-text-color: #ffffff;
+                            --secondary-background-color: #ccae99;
+                          }
+                      type: custom:vertical-stack-in-card
+                      cards:
+                        - type: custom:bubble-card
+                          card_type: separator
+                          name: Infos
+                          icon: ''
+                          columns: 2
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 20px !important;
+                            }
+                        - type: custom:bubble-card
+                          card_type: button
+                          button_type: state
+                          card_layout: normal
+                          name: Temperature
+                          entity: sensor.lumi_temp_salon_temperature
+                          icon: mdi:thermometer-alert
+                          show_state: true
+                          sub_button:
+                            - entity: sensor.lumi_temp_salon_humidite
+                              icon: mdi:water-alert-outline
+                              show_background: false
+                              show_state: true
+                            - entity: sensor.lumi_temp_salon_batterie
+                              show_state: true
+                              show_background: false
+                              show_attribute: false
+                          show_attribute: false
+                          styles: |-
+                            ha-card{
+                              margin-top: 10px !important;
+                              margin-bottom: 10px !important;
+                              margin-right: 10px !important;
+                              margin-left: 10px !important;
+                            }
+                        - type: custom:bubble-card
+                          card_type: button
+                          button_type: state
+                          entity: binary_sensor.controle_courrier_jour
+                          name: Courrier
+                          icon: mdi:mailbox-open-outline
+                          show_attribute: false
+                          styles: >-
+                            ha-card{
+                              margin-top: 10px !important;
+                              margin-bottom: 10px !important;
+                              margin-right: 10px !important;
+                              margin-left: 10px !important;
+                            } ${card.querySelector('.bubble-state').innerText =
+                            hass.states['binary_sensor.controle_courrier_jour'].state
+                            === 'off' ? 'To check' : 'Checked'}
+                          card_layout: normal
+                        - type: custom:bubble-card
+                          card_type: separator
+                          name: Activity
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 15px !important;
+                              margin-right: 10px !important;
+                              margin-left: 0px !important;
+                            }
+                        - square: false
+                          type: grid
+                          columns: 2
+                          rows: 2
+                          cards:
+                            - type: custom:bubble-card
+                              name: PIR Salon
+                              card_type: button
+                              button_type: state
+                              entity: select.tapo_c200_salon_motion_detection
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                            - type: custom:bubble-card
+                              name: PIR Cuisine
+                              card_type: button
+                              button_type: state
+                              entity: >-
+                                binary_sensor.ikea_tradfri_motion_sensor_cuisine_mouvement
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                            - type: custom:bubble-card
+                              name: PIR SDB
+                              card_type: button
+                              button_type: state
+                              entity: >-
+                                binary_sensor.ikea_tradfri_motion_sensor_sdb_mouvement
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 5px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                            - type: custom:bubble-card
+                              name: PIR Carnotze
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.tapo_c500_carnotze_hd_motion
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 10px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                        - type: custom:bubble-card
+                          card_type: separator
+                          name: Doors
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 15px !important;
+                              margin-right: 10px !important;
+                              margin-left: 0px !important;
+                            }
+                        - square: false
+                          type: grid
+                          columns: 2
+                          rows: 2
+                          cards:
+                            - type: custom:bubble-card
+                              name: Cabane
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.porte_cabane_ouverture
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:door-open
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: none
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Entrée
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.porte_entree_ouverture
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 5px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                              icon: mdi:door-open
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: none
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Amis
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.porte_jardin_chambre_ouverture
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:door-open
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: none
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Couloir
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.porte_jardin_couloir_ouverture
+                              card_layout: large
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 2px !important;
+                                  margin-right: 10px !important;
+                                  margin-left: 2px !important;
+                                }
+                              icon: mdi:door-open
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: none
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                            - type: custom:bubble-card
+                              name: Garage
+                              card_type: button
+                              button_type: state
+                              entity: binary_sensor.verrou_porte_garage_ouverture
+                              styles: |-
+                                ha-card{
+                                  margin-top: 0px !important;
+                                  margin-bottom: 5px !important;
+                                  margin-right: 2px !important;
+                                  margin-left: 10px !important;
+                                }
+                              icon: mdi:garage
+                              show_state: true
+                              show_attribute: false
+                              tap_action:
+                                action: none
+                              double_tap_action:
+                                action: none
+                              hold_action:
+                                action: none
+                              button_action:
+                                double_tap_action:
+                                  action: none
+                                hold_action:
+                                  action: none
+                    attributes:
+                      label: Load
+                  - card:
+                      card_mod:
+                        style: |
+                          ha-card {
+                            background-color: transparent !important;
+                            box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                            border: none !important;
+                            --accent-color: #ccae99;
+                            --primary-color: #ffffff;
+                            --secondary-text-color: #ffffff;
+                            --secondary-background-color: #ccae99;
+                          }
+                      type: custom:vertical-stack-in-card
+                      cards:
+                        - type: custom:bubble-card
+                          card_type: separator
+                          name: Gas
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 20px !important;
+                            }
+                        - type: energy-gas-graph
+                          card_mod:
+                            style: |
+                              ha-card {
+                                background-color: transparent !important;
+                                box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                                border: none !important;
+                              }
+                        - type: custom:bubble-card
+                          card_type: separator
+                          styles: |-
+                            .bubble-line {
+                                background-color: #ccae99;
+                            }
+                            ha-card{
+                              margin-top: 20px !important;
+                              margin-bottom: 20px !important;
+                            }
+                          name: Water
+                        - type: energy-water-graph
+                          card_mod:
+                            style: |
+                              ha-card {
+                                background-color: transparent !important;
+                                box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                                border: none !important;
+                              }
+                    attributes:
+                      label: Energy
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashsalon'
+                button_type: switch
+                entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                icon: mdi:led-strip-variant
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: 100px
+                margin_top_desktop: calc(480px - 400px)
+                name: Leds cuisine
+                tap_action:
+                  action: toggle
+                slide_to_close_distance: '150'
+              - type: custom:bubble-card
+                card_type: separator
+                name: Infos
+                icon: ''
+                columns: 2
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: Temperature
+                entity: sensor.lumi_temp_salon_temperature
+                icon: mdi:thermometer-alert
+                show_state: true
+                sub_button:
+                  - entity: sensor.lumi_temp_salon_humidite
+                    icon: mdi:water-alert-outline
+                    show_background: false
+                    show_state: true
+                  - entity: sensor.lumi_temp_salon_batterie
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c200_salon_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Devices
+                styles: |2-
+
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - square: false
+                type: grid
+                columns: 2
+                rows: 1
+                cards:
+                  - type: custom:bubble-card
+                    name: PIR Cuisine
+                    card_type: button
+                    button_type: state
+                    entity: binary_sensor.ikea_tradfri_motion_sensor_cuisine_mouvement
+                    card_layout: large
+                    styles: |-
+                      .bubble-icon {
+                        color: ${hass.states['binary_sensor.ikea_tradfri_motion_sensor_cuisine_mouvement'].state === 'on' ? '#ccae99' : 'inherit'} !important;
+                      }
+                  - type: custom:bubble-card
+                    card_type: media-player
+                    button_type: state
+                    entity: media_player.tv_samsung_led55
+                    icon: mdi:television
+                    styles: |-
+                      .bubble-icon {
+                        color: ${hass.states['media_player.tv_samsung_led55'].state === 'on' ? '#ccae99' : 'inherit'} !important;
+                      }
+                      .bubble-power-button {
+                        color: ${hass.states['media_player.tv_samsung_led55'].state === 'on' ? '#ccae99' : 'inherit'} !important;
+                      }
+                    hide:
+                      play_pause_button: true
+                      volume_button: true
+                      next_button: true
+                      previous_button: true
+              - type: custom:bubble-card
+                card_type: media-player
+                name: Sonos salon
+                button_type: state
+                entity: media_player.salon
+                styles: |-
+                  .bubble-play-pause-button {
+                      background-color: #ccae99 !important;
+                  }
+                  .bubble-sub-button-1 {
+                    background-color: transparent !important;
+                  }
+                hide:
+                  power_button: true
+                  previous_button: true
+                  next_button: true
+                sub_button:
+                  - entity: sensor.wifek_wifek
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#dashmusiquesalon'
+                    icon: mdi:arrow-expand
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashbureaumanu'
+                button_type: slider
+                entity: light.ikea_ormanas_led_strip_bureau_lumiere
+                icon: mdi:led-strip-variant
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: 300px
+                margin_top_desktop: calc(480px - 400px)
+                name: Leds bureau
+                tap_action:
+                  action: toggle
+              - type: custom:bubble-card
+                card_type: separator
+                name: Info
+                styles: |2-
+
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: Temperature
+                entity: sensor.lumi_temp_bureau_manu_temperature
+                icon: mdi:thermometer-alert
+                show_state: true
+                sub_button:
+                  - entity: sensor.lumi_temp_bureau_manu_humidite
+                    icon: mdi:water-alert-outline
+                    show_background: false
+                    show_state: true
+                  - entity: sensor.lumi_temp_bureau_manu_batterie
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: custom:bubble-card
+                card_type: separator
+                name: Devices
+                styles: |2-
+
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: media-player
+                button_type: state
+                entity: media_player.bureau_manu
+                styles: |-
+                  .bubble-play-pause-button {
+                      background-color: #ccae99 !important;
+                  }
+
+                  .bubble-sub-button-1 {
+                    background-color: transparent !important;
+                  }
+                hide:
+                  power_button: true
+                  next_button: true
+                  previous_button: true
+                sub_button:
+                  - entity: sensor.wifek_wifek
+                    tap_action:
+                      action: navigate
+                      navigation_path: '#dashmusique'
+                    icon: mdi:arrow-expand
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                entity: sensor.mcom_linux_power_state
+                icon: mdi:penguin
+                styles: |-
+                  .bubble-sub-button-2 {
+                    background-color: #ccae99 !important;
+                  }
+                show_last_changed: false
+                sub_button:
+                  - entity: sensor.mcom_linux_uptime
+                    show_icon: false
+                    show_state: true
+                    state_background: false
+                    show_background: false
+                  - entity: button.mcom_linux_reboot
+                name: PC Manu
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashgarage'
+                button_type: switch
+                entity: switch.lumiere_garage_commutateur
+                icon: mdi:ceiling-light-multiple-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Lumière garage
+                tap_action:
+                  action: toggle
+              - type: custom:bubble-card
+                card_type: separator
+                name: Infos
+                styles: |2-
+
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: Temperature
+                entity: sensor.lumi_temp_garage_temperature
+                icon: mdi:thermometer-alert
+                show_state: true
+                sub_button:
+                  - entity: sensor.lumi_temp_garage_humidite
+                    icon: mdi:water-alert-outline
+                    show_background: false
+                    show_state: true
+                  - entity: sensor.lumi_temp_garage_batterie
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c200_garage_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Devices
+                styles: |2-
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                name: PIR Garage
+                entity: binary_sensor.tapo_c200_garage_cell_motion_detection
+              - type: custom:bubble-card
+                card_type: media-player
+                button_type: state
+                name: AirPlay Garage
+                entity: media_player.garage_airplay
+                styles: |-
+                  .bubble-play-pause-button {
+                      background-color: #ccae99 !important;
+                  }
+                hide:
+                  power_button: true
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashphones'
+                button_type: state
+                entity: sensor.phones_not_home
+                icon: mdi:tag-arrow-down-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Tagged devices
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Phones
+                styles: |2-
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: iPhone Manu
+                entity: sensor.iphone14m_espresense
+                icon: mdi:cellphone
+                styles: >-
+                  .bubble-icon {
+                    color: ${hass.states['sensor.iphone14m_espresense'].state === 'chambre_amis' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'bureau' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'tv' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'cuisine' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'garage' ? 'inherit' : hass.states['sensor.iphone14m_espresense'].state === 'not_home' ? '#ccae99' : hass.states['sensor.iphone14m_espresense'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                  } ${card.querySelector('.bubble-state').innerText =
+                  hass.states['sensor.iphone14m_espresense'].state === 'bureau'
+                  ? 'Office Manu' :
+                  hass.states['sensor.iphone14m_espresense'].state === 'tv' ?
+                  'Salon' : hass.states['sensor.iphone14m_espresense'].state ===
+                  'cuisine' ? 'Cuisine' :
+                  hass.states['sensor.iphone14m_espresense'].state ===
+                  'chambre_parents' ? 'Chambre parents' :
+                  hass.states['sensor.iphone14m_espresense'].state === 'garage'
+                  ? 'Garage' : hass.states['sensor.iphone14m_espresense'].state
+                  === 'not_home' ? 'Not home' :
+                  hass.states['sensor.iphone14m_espresense'].state ===
+                  'carnotze' ? 'Carnotze' :
+                  hass.states['sensor.iphone14m_espresense'].state ===
+                  'chambre_amis' ? 'Chambre amis' : 'Unknown'}
+                show_state: true
+                sub_button:
+                  - entity: sensor.iphone_12m_2_battery_state_2
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                    icon: mdi:battery-charging-40
+                  - entity: sensor.iphone_14m_batterie
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: iPhone bureau
+                entity: sensor.iphone_se_bureau_espresense
+                icon: mdi:cellphone
+                styles: >-
+                  .bubble-sub-button-1 > ha-icon {
+                    color: ${hass.states['sensor.iphone_se_bureau_espresense'].state === 'not_home' ? 'inherit' : '#ccae99'} !important;
+                  } .bubble-icon {
+                    color: ${hass.states['sensor.iphone_se_bureau_espresense'].state === 'bureau' ? 'inherit' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'tv' ? 'inherit' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'cuisine' ? 'inherit' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'garage' ? 'inherit' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'not_home' ? '#ccae99' : hass.states['sensor.iphone_se_bureau_espresense'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                  } ${card.querySelector('.bubble-state').innerText =
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'bureau' ? 'Office Manu' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'tv' ? 'Salon' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'cuisine' ? 'Cuisine' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'chambre_parents' ? 'Chambre parents' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'garage' ? 'Garage' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'not_home' ? 'Not home' :
+                  hass.states['sensor.iphone_se_bureau_espresense'].state ===
+                  'carnotze' ? 'Carnotze' : 'Unknown'}
+                show_state: true
+                sub_button:
+                  - entity: device_tracker.iphone_bureau
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: iPhone wife
+                entity: sensor.iphone_14_wife_espresense
+                icon: mdi:cellphone
+                styles: >-
+                  .bubble-sub-button-1 > ha-icon {
+                    color: ${hass.states['sensor.iphone_14_wife_espresense'].state === 'not_home' ? 'inherit' : '#ccae99'} !important;
+                  } .bubble-icon {
+                    color: ${hass.states['sensor.iphone_14_wife_espresense'].state === 'bureau' ? 'inherit' : hass.states['sensor.iphone_14_wife_espresense'].state === 'tv' ? 'inherit' : hass.states['sensor.iphone_14_wife_espresense'].state === 'cuisine' ? 'inherit' : hass.states['sensor.iphone_14_wife_espresense'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.iphone_14_wife_espresense'].state === 'garage' ? 'inherit' : hass.states['sensor.iphone_14_wife_espresense'].state === 'not_home' ? '#ccae99' : hass.states['sensor.iphone_14_wife_espresense'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                  } ${card.querySelector('.bubble-state').innerText =
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'bureau' ? 'Office Manu' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state === 'tv'
+                  ? 'Salon' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'cuisine' ? 'Cuisine' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'chambre_parents' ? 'Chambre parents' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'garage' ? 'Garage' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'not_home' ? 'Not home' :
+                  hass.states['sensor.iphone_14_wife_espresense'].state ===
+                  'carnotze' ? 'Carnotze' : 'Unknown'}
+                show_state: true
+                sub_button:
+                  - entity: device_tracker.iphone_14_wife_23
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: custom:bubble-card
+                card_type: separator
+                name: Tablets
+                styles: |2-
+
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: iPad Manu
+                entity: sensor.ipad12m_espresense
+                icon: mdi:tablet
+                styles: >-
+                  .bubble-icon {
+                    color: ${hass.states['sensor.ipad12m_espresense'].state === 'bureau' ? 'inherit' : hass.states['sensor.ipad12m_espresense'].state === 'tv' ? 'inherit' : hass.states['sensor.ipad12m_espresense'].state === 'cuisine' ? 'inherit' : hass.states['sensor.ipad12m_espresense'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.ipad12m_espresense'].state === 'garage' ? 'inherit' : hass.states['sensor.ipad12m_espresense'].state === 'not_home' ? '#ccae99' : hass.states['sensor.ipad12m_espresense'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                  } ${card.querySelector('.bubble-state').innerText =
+                  hass.states['sensor.ipad12m_espresense'].state === 'bureau' ?
+                  'Office Manu' : hass.states['sensor.ipad12m_espresense'].state
+                  === 'tv' ? 'Salon' :
+                  hass.states['sensor.ipad12m_espresense'].state === 'cuisine' ?
+                  'Cuisine' : hass.states['sensor.ipad12m_espresense'].state ===
+                  'chambre_parents' ? 'Chambre parents' :
+                  hass.states['sensor.ipad12m_espresense'].state === 'garage' ?
+                  'Garage' : hass.states['sensor.ipad12m_espresense'].state ===
+                  'not_home' ? 'Not home' :
+                  hass.states['sensor.ipad12m_espresense'].state === 'carnotze'
+                  ? 'Carnotze' : 'Unknown'}
+                show_state: true
+                sub_button:
+                  - entity: sensor.ipad_de_emmanuel_battery_state
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                    icon: mdi:battery-charging-40
+                  - entity: sensor.ipad_de_emmanuel_battery_level
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: SX-200 Manu
+                entity: sensor.samsung_x200_espresense
+                icon: mdi:tablet
+                styles: >-
+                  .bubble-icon {
+                    color: ${hass.states['sensor.samsung_x200_espresense'].state === 'bureau' ? 'inherit' : hass.states['sensor.samsung_x200_espresense'].state === 'tv' ? 'inherit' : hass.states['sensor.samsung_x200_espresense'].state === 'cuisine' ? 'inherit' : hass.states['sensor.samsung_x200_espresense'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.samsung_x200_espresense'].state === 'garage' ? 'inherit' : hass.states['sensor.samsung_x200_espresense'].state === 'not_home' ? '#ccae99' : hass.states['sensor.samsung_x200_espresense'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                  } ${card.querySelector('.bubble-state').innerText =
+                  hass.states['sensor.samsung_x200_espresense'].state ===
+                  'bureau' ? 'Office Manu' :
+                  hass.states['sensor.samsung_x200_espresense'].state === 'tv' ?
+                  'Salon' : hass.states['sensor.samsung_x200_espresense'].state
+                  === 'cuisine' ? 'Cuisine' :
+                  hass.states['sensor.samsung_x200_espresense'].state ===
+                  'chambre_parents' ? 'Chambre parents' :
+                  hass.states['sensor.samsung_x200_espresense'].state ===
+                  'garage' ? 'Garage' :
+                  hass.states['sensor.samsung_x200_espresense'].state ===
+                  'not_home' ? 'Not home' :
+                  hass.states['sensor.samsung_x200_espresense'].state ===
+                  'carnotze' ? 'Carnotze' : 'Unknown'}
+                show_state: true
+                sub_button:
+                  - entity: sensor.sm_x200_battery_state_2
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                    icon: mdi:battery-charging-40
+                  - entity: sensor.sm_x200_battery_level_2
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+              - type: custom:bubble-card
+                card_type: separator
+                name: Trash
+                styles: |2-
+                    .bubble-line {
+                        background-color: #ccae99;
+                    }
+              - square: false
+                type: grid
+                columns: 2
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    card_layout: normal
+                    name: Générale
+                    entity: sensor.poubelle_generale
+                    icon: mdi:food-turkey
+                    styles: >-
+                      .bubble-icon {
+                        color: ${hass.states['sensor.poubelle_generale'].state === 'bureau' ? 'inherit' : hass.states['sensor.poubelle_generale'].state === 'tv' ? 'inherit' : hass.states['sensor.poubelle_generale'].state === 'cuisine' ? 'inherit' : hass.states['sensor.poubelle_generale'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.poubelle_generale'].state === 'garage' ? 'inherit' : hass.states['sensor.poubelle_generale'].state === 'not_home' ? '#ccae99' : hass.states['sensor.poubelle_generale'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                      } ${card.querySelector('.bubble-state').innerText =
+                      hass.states['sensor.poubelle_generale'].state === 'bureau'
+                      ? 'Home' : hass.states['sensor.poubelle_generale'].state
+                      === 'tv' ? 'Home' :
+                      hass.states['sensor.poubelle_generale'].state ===
+                      'cuisine' ? 'Home' :
+                      hass.states['sensor.poubelle_generale'].state ===
+                      'chambre_parents' ? 'Home' :
+                      hass.states['sensor.poubelle_generale'].state === 'garage'
+                      ? 'Home' : hass.states['sensor.poubelle_generale'].state
+                      === 'not_home' ? 'Not home' :
+                      hass.states['sensor.poubelle_generale'].state ===
+                      'carnotze' ? 'Home' : 'Far away'}
+                    show_state: true
+                    sub_button: []
+                    show_attribute: false
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    card_layout: normal
+                    name: Verre
+                    icon: mdi:bottle-wine-outline
+                    styles: >-
+                      .bubble-icon {
+                        color: ${hass.states['sensor.poubelle_verre'].state === 'bureau' ? 'inherit' : hass.states['sensor.poubelle_verre'].state === 'tv' ? 'inherit' : hass.states['sensor.poubelle_verre'].state === 'cuisine' ? 'inherit' : hass.states['sensor.poubelle_verre'].state === 'chambre_parents' ? 'inherit' : hass.states['sensor.poubelle_verre'].state === 'garage' ? 'inherit' : hass.states['sensor.poubelle_verre'].state === 'not_home' ? '#ccae99' : hass.states['sensor.poubelle_verre'].state === 'carnotze' ? 'inherit' : '#ccae99'} !important;
+                      } ${card.querySelector('.bubble-state').innerText =
+                      hass.states['sensor.poubelle_verre'].state === 'bureau' ?
+                      'Home' : hass.states['sensor.poubelle_verre'].state ===
+                      'tv' ? 'Home' : hass.states['sensor.poubelle_verre'].state
+                      === 'cuisine' ? 'Home' :
+                      hass.states['sensor.poubelle_verre'].state ===
+                      'chambre_parents' ? 'Home' :
+                      hass.states['sensor.poubelle_verre'].state === 'garage' ?
+                      'Home' : hass.states['sensor.poubelle_verre'].state ===
+                      'not_home' ? 'Not home' :
+                      hass.states['sensor.poubelle_verre'].state === 'carnotze'
+                      ? 'Home' : 'Far away'}
+                    show_state: true
+                    sub_button: []
+                    show_attribute: false
+                    entity: sensor.poubelle_verre
+                show_attribute: false
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashcameras'
+                button_type: state
+                entity: sensor.cams_home
+                icon: mdi:cctv
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Home cams
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Salon
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c200_salon_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_salon_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Carnotze
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c500_carnotze_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c500_carnotze_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c500_carnotze_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c500_carnotze_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c500_carnotze_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Garage
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c200_garage_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_garage_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Jardin
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c520ws_jardin_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_jardin_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_jardin_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_jardin_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_jardin_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Cave
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c200_flotante_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_flotante_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_flotante_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_flotante_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c200_flotante_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Balcon
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c520ws_balcon_hd_stream
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_balcon_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_balcon_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_balcon_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520ws_balcon_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashtools'
+                button_type: name
+                entity: sensor.cams_home
+                icon: mdi:hammer-wrench
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: 310px
+                margin_top_desktop: calc(480px - 400px)
+                name: Tools
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Wifi
+              - camera_view: auto
+                type: picture-glance
+                title: Wifi
+                entities: []
+                aspect_ratio: 640x350
+                camera_image: camera.homeassistant_local
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashpeople'
+                button_type: name
+                entity: sensor.cams_home
+                icon: mdi:account-group
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: People
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Crew
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - square: false
+                type: grid
+                columns: 2
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: person.wife
+                    styles: |-
+                      .bubble-icon-container {
+                          border: ${hass.states['person.wife'].state === 'home' ? '1px solid #ccae99 !important;' : 'none !important;' }
+                          opacity: ${hass.states['person.wife'].state === 'home' ? '1; !important;' : '0.5; !important;' }
+                      }
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: person.daughter
+                    styles: |-
+                      .bubble-icon-container {
+                          border: ${hass.states['person.daughter'].state === 'home' ? '1px solid #ccae99 !important;' : 'none !important;' }
+                          opacity: ${hass.states['person.daughter'].state === 'home' ? '1; !important;' : '0.5; !important;' }
+                      }
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: person.manu
+                    styles: >-
+                      .bubble-icon-container {
+                          border: ${hass.states['person.manu'].state === 'home' ? '1px solid #ccae99 !important;' : 'none !important;' }
+                          opacity: ${hass.states['person.manu'].state === 'home' ? '1; !important;' : '0.5; !important;' }
+                      } ${card.querySelector('.bubble-state').innerText =
+                      hass.states['sensor.maison_distance_avec_iphone_14m'].state
+                      === '0.0' ? 'Home' :
+                      hass.states['sensor.maison_distance_avec_iphone_14m'].state
+                      + ' ' +
+                      hass.states['sensor.maison_distance_avec_iphone_14m'].attributes.unit_of_measurement
+                      }
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: person.son
+                    styles: |-
+                      .bubble-icon-container {
+                          border: ${hass.states['person.son'].state === 'home' ? '1px solid #ccae99 !important;' : 'none !important;' }
+                          opacity: ${hass.states['person.son'].state === 'home' ? '1; !important;' : '0.5; !important;' }
+                      }
+              - type: custom:bubble-card
+                card_type: separator
+                name: Team
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - square: false
+                type: grid
+                columns: 2
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: person.pascal_miraille
+                    styles: |-
+                      .bubble-icon-container {
+                          border: ${hass.states['person.other'].state === 'home' ? '1px solid #ccae99 !important;' : 'none !important;' }
+                          opacity: ${hass.states['person.other'].state === 'home' ? '1; !important;' : '0.5; !important;' }
+                      }
+                visibility:
+                  - condition: state
+                    entity: person.pascal_other
+                    state: home
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashnrj'
+                button_type: name
+                entity: sensor.phones_not_home
+                icon: mdi:lightning-bolt-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Energy
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Gas
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: energy-gas-graph
+              - type: custom:bubble-card
+                card_type: separator
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+                name: Water
+              - type: energy-water-graph
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashchambreamis'
+                button_type: name
+                entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                icon: mdi:bed-king-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: 175px
+                margin_top_desktop: calc(480px - 400px)
+                name: Chambre amis
+                tap_action:
+                  action: toggle
+                slide_to_close_distance: '150'
+              - type: custom:bubble-card
+                card_type: separator
+                name: Infos
+                icon: ''
+                columns: 2
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - type: custom:bubble-card
+                card_type: button
+                button_type: state
+                card_layout: normal
+                name: Temperature
+                entity: sensor.lumi_temp_chambre_invites_temperature
+                icon: mdi:thermometer-alert
+                show_state: true
+                sub_button:
+                  - entity: sensor.lumi_temp_chambre_invites_humidite
+                    icon: mdi:water-alert-outline
+                    show_background: false
+                    show_state: true
+                  - entity: sensor.lumi_temp_chambre_invites_batterie
+                    show_state: true
+                    show_background: false
+                    show_attribute: false
+                show_attribute: false
+              - type: picture-elements
+                camera_view: live
+                camera_image: camera.tapo_c520_jardin_hd
+                card_mod:
+                  style: |
+                    ha-card {
+                      border-radius: 36px;
+                    }
+                aspect_ratio: '16:9'
+                elements:
+                  - type: icon
+                    icon: mdi:arrow-left-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520_jardin_move_left
+                    style:
+                      bottom: 46%
+                      left: 5%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-right-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520_jardin_move_right
+                    style:
+                      bottom: 46%
+                      right: 3%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-up-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520_jardin_move_up
+                    style:
+                      top: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+                  - type: icon
+                    icon: mdi:arrow-down-drop-circle
+                    tap_action:
+                      action: call-service
+                      service: button.press
+                      service_data:
+                        entity_id: button.tapo_c520_jardin_move_down
+                    style:
+                      bottom: 5%
+                      left: 46%
+                      color: white
+                      opacity: 0.5
+                      transform: scale(1.5, 1.5)
+              - type: custom:bubble-card
+                card_type: separator
+                name: Devices
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - square: false
+                type: grid
+                columns: 2
+                rows: 1
+                cards:
+                  - type: custom:bubble-card
+                    card_type: button
+                    button_type: state
+                    entity: binary_sensor.tapo_c520ws_jardin_cell_motion_detection
+                    card_layout: large
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashmusique'
+                button_type: name
+                entity: sensor.phones_not_home
+                icon: mdi:music
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Sonos Manu
+                tap_action:
+                  action: none
+              - type: custom:sonos-card
+                sections:
+                  - player
+                  - media browser
+                entities:
+                  - media_player.bureau_manu
+                hidePlayerControlPowerButton: true
+                hidePlayerControlShuffleButton: true
+                topFavorites:
+                  - ''
+                hideBrowseMediaButton: true
+                favoritesHideTitleForThumbnailIcons: false
+                showBrowseMediaInPlayerSection: false
+                hidePlayerControlPrevTrackButton: false
+                hidePlayerControlNextTrackButton: false
+                hidePlayerControlRepeatButton: true
+                heightPercentage: 90
+                card_mod:
+                  style: |
+                    ha-card {
+                      background-color: transparent !important;
+                      box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                      border: none !important;
+                      --accent-color: #ccae99;
+                      --primary-color: #ffffff;
+                      --secondary-text-color: #ffffff;
+                      --secondary-background-color: #ccae99;
+                    }
+                    .entity {
+                      display: none !important;
+                    }
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashmusiquesalon'
+                button_type: name
+                entity: sensor.phones_not_home
+                icon: mdi:music
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(480px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Sonos Salon
+                tap_action:
+                  action: none
+              - type: custom:sonos-card
+                sections:
+                  - player
+                  - media browser
+                entities:
+                  - media_player.salon
+                hidePlayerControlPowerButton: true
+                hidePlayerControlShuffleButton: true
+                topFavorites:
+                  - ''
+                hideBrowseMediaButton: true
+                favoritesHideTitleForThumbnailIcons: false
+                showBrowseMediaInPlayerSection: false
+                hidePlayerControlPrevTrackButton: false
+                hidePlayerControlNextTrackButton: false
+                hidePlayerControlRepeatButton: true
+                heightPercentage: 90
+                startSection: player
+                card_mod:
+                  style: |
+                    ha-card {
+                      background-color: transparent !important;
+                      box-shadow: 0px 0px 0px 0px rgba(0,0,0,0) !important;
+                      border: none !important;
+                      --accent-color: #ccae99;
+                      --primary-color: #ffffff;
+                      --secondary-text-color: #ffffff;
+                      --secondary-background-color: #ccae99;
+                    }
+                    .entity {
+                      display: none !important;
+                    }
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashdetaillousses'
+                button_type: name
+                entity: sensor.phones_not_home
+                icon: mdi:lightning-bolt-outline
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(720px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Lights
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Status
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:bubble-card
+                    name: Porche
+                    card_type: button
+                    button_type: switch
+                    entity: switch.sonoff_zbminil2_entree_commutateur
+                    card_layout: large
+                    icon: mdi:lightbulb
+                    show_state: true
+                    show_attribute: false
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - type: custom:bubble-card
+                    name: Balancelle
+                    card_type: button
+                    button_type: switch
+                    entity: switch.sonoff_zbminil2_lampe_jardin_commutateur
+                    card_layout: large
+                    icon: mdi:lightbulb
+                    show_state: true
+                    show_attribute: false
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - type: custom:bubble-card
+                    name: Bureau manu
+                    card_type: button
+                    button_type: slider
+                    entity: light.ikea_ormanas_led_strip_bureau_lumiere
+                    card_layout: large
+                    icon: mdi:led-strip-variant
+                    show_state: true
+                    show_attribute: false
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - type: custom:bubble-card
+                    name: Cuisine
+                    card_type: button
+                    button_type: slider
+                    entity: light.ikea_ormanas_led_strip_cuisine_lumiere
+                    card_layout: large
+                    icon: mdi:led-strip-variant
+                    show_state: true
+                    show_attribute: false
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                  - type: custom:bubble-card
+                    name: Garage
+                    card_type: button
+                    button_type: switch
+                    entity: switch.lumiere_garage_commutateur
+                    card_layout: large
+                    icon: mdi:lightbulb
+                    show_state: true
+                    show_attribute: false
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                columns: 2
+          - type: vertical-stack
+            cards:
+              - type: custom:bubble-card
+                card_type: pop-up
+                hash: '#dashdetailcars'
+                button_type: name
+                entity: sensor.phones_not_home
+                icon: mdi:car
+                use_accent_color: false
+                show_icon: true
+                force_icon: true
+                show_state: true
+                show_last_changed: true
+                auto_close: ''
+                card_layout: normal
+                margin_top_mobile: calc(820px - 400px)
+                margin_top_desktop: calc(480px - 400px)
+                name: Bagnoles
+                tap_action:
+                  action: none
+              - type: custom:bubble-card
+                card_type: separator
+                name: Status
+                styles: |-
+                  .bubble-line {
+                      background-color: #ccae99;
+                  }
+              - square: false
+                type: grid
+                cards:
+                  - type: custom:bubble-card
+                    name: BMW
+                    card_type: button
+                    button_type: state
+                    card_layout: large
+                    icon: mdi:car-connected
+                    show_state: true
+                    show_attribute: true
+                    tap_action:
+                      action: none
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                    entity: sensor.scenic_bmw_ibeacon_chipolo
+                    attribute: distance
+                  - type: custom:bubble-card
+                    name: Scenic
+                    card_type: button
+                    button_type: state
+                    card_layout: large
+                    icon: mdi:car-connected
+                    show_state: true
+                    show_attribute: true
+                    tap_action:
+                      action: toggle
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    button_action:
+                      double_tap_action:
+                        action: none
+                      hold_action:
+                        action: none
+                    entity: sensor.scenic_ibeacon_chipolo
+                    attribute: distance
+                columns: 2
+          - type: custom:bubble-card
+            card_type: horizontal-buttons-stack
+            auto_order: true
+            1_name: ''
+            1_icon: mdi:sofa
+            1_link: '#dashsalon'
+            1_entity: binary_sensor.ikea_tradfri_motion_sensor_cuisine_mouvement
+            1_pir_sensor: binary_sensor.ikea_tradfri_motion_sensor_cuisine_mouvement
+            4_icon: mdi:bed-outline
+            4_link: '#dashchambreamis'
+            4_entity: light.dining_room
+            4_pir_sensor: binary_sensor.dining_room_motion
+            hide_gradient: false
+            highlight_current_view: false
+            styles: |2-
+               ha-card { 
+                   display: block;  
+               }
+              .bubble-background-color {
+                  border: none !important;
+                  --bubble-horizontal-buttons-stack-border-radius: 18px !important;
+              }
+              .horizontal-buttons-stack-card::before {
+                  background: #ccae99 !important;
+                  height: 80px;
+                  top: -3px;
+                  left: -20px;
+              }
+              .horizontal-buttons-stack-card {
+                  height: 50px !important;
+              }
+              .bubble-background {
+                  background-color: transparent !important;
+              }
+              .bubble-button {
+                  color: #305260 !important;
+              }
+               .card-content {
+                  height: 80px !important;
+              }
+            3_icon: mdi:car-wrench
+            3_link: '#dashgarage'
+            3_entity: light.dining_room
+            3_pir_sensor: binary_sensor.dining_room_motion
+            2_name: ''
+            2_icon: mdi:chair-rolling
+            2_link: '#dashbureaumanu'
+            2_entity: light.dining_room
+            2_pir_sensor: binary_sensor.dining_room_motion
+            margin: 7px
+            grid_options:
+              columns: 12
+              rows: 1
+            5_icon: mdi:desktop-tower-monitor
+            5_link: '#bureaumanu'
+        column_span: 1
+    cards: []
