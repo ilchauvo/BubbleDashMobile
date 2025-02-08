@@ -137,7 +137,7 @@ views:
                   - type: custom:bubble-card
                     card_type: button
                     button_type: state
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     name: Trash
                     show_state: true
                     card_layout: large-2-rows
@@ -290,7 +290,7 @@ views:
                         show_background: false
                     styles: ''
                     icon: mdi:home-lightning-bolt-outline
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     tap_action:
                       action: none
                     double_tap_action:
@@ -312,7 +312,7 @@ views:
                         button_type: name
                         card_layout: large-2-rows
                         name: Home
-                        entity: sensor.wifek_wifek
+                        entity: sensor.blank_blank
                         icon: mdi:account-group
                         show_state: true
                         button_action:
@@ -377,7 +377,7 @@ views:
                         button_type: name
                         card_layout: large-2-rows
                         name: Status
-                        entity: sensor.wifek_wifek
+                        entity: sensor.blank_blank
                         icon: mdi:state-machine
                         show_state: true
                         button_action:
@@ -743,7 +743,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:button-card
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     name: |
                       [[[ 
                       return states['sensor.upcoming_movie_title'].state
@@ -785,7 +785,7 @@ views:
                       columns: 6
                       rows: 1
                   - type: custom:button-card
-                    entity: sensor.wifek_wifeke
+                    entity: sensor.blank_blanke
                     name: >
                       [[[ 
 
@@ -882,7 +882,7 @@ views:
                       left: 88%
                       top: 53%
                   - type: state-label
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     prefix: Office Manu
                     tap_action:
                       action: none
@@ -927,7 +927,7 @@ views:
                       left: 88%
                       top: 82%
                   - type: state-label
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     prefix: Salon & cuisine
                     tap_action:
                       action: none
@@ -972,7 +972,7 @@ views:
                       left: 88%
                       top: 82%
                   - type: state-label
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     prefix: Garage
                     tap_action:
                       action: none
@@ -1017,7 +1017,7 @@ views:
                       left: 88%
                       top: 82%
                   - type: state-label
-                    entity: sensor.wifek_wifek
+                    entity: sensor.blank_blank
                     prefix: Chambre amis
                     tap_action:
                       action: none
@@ -1763,7 +1763,7 @@ views:
                   previous_button: true
                   next_button: true
                 sub_button:
-                  - entity: sensor.wifek_wifek
+                  - entity: sensor.blank_blank
                     tap_action:
                       action: navigate
                       navigation_path: '#dashmusiquesalon'
@@ -1839,7 +1839,7 @@ views:
                   next_button: true
                   previous_button: true
                 sub_button:
-                  - entity: sensor.wifek_wifek
+                  - entity: sensor.blank_blank
                     tap_action:
                       action: navigate
                       navigation_path: '#dashmusique'
