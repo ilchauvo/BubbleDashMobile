@@ -3252,7 +3252,7 @@ views:
                 type: grid
                 cards:
                   - type: custom:bubble-card
-                    name: BMW
+                    name: Béhème
                     card_type: button
                     button_type: state
                     card_layout: large
@@ -3270,7 +3270,7 @@ views:
                         action: none
                       hold_action:
                         action: none
-                    entity: sensor.scenic_bmw_ibeacon_chipolo
+                    entity: sensor.scenic_beheme_ibeacon_chipolo
                     attribute: distance
                   - type: custom:bubble-card
                     name: Scenic
