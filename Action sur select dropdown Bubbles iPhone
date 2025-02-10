@@ -1,0 +1,63 @@
+##Automation for drop-down list in Bubble
+##Based on Browser-mod component, option navigate
+alias: Action sur select dropdown Bubbles iPhone
+description: ""
+triggers:
+  - entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+    trigger: state
+actions:
+  - choose:
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: Tagged devices
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashphones"
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: People
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashpeople"
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: Energy
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashnrj"
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: Home cams
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashcameras"
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: Settings
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashtools"
+      - conditions:
+          - condition: state
+            entity_id: input_select.liste_option_dropdown_gui_bubble_iphone
+            state: Home status
+        sequence:
+          - action: browser_mod.navigate
+            metadata: {}
+            data:
+              path: "#dashactivitesmaison"
